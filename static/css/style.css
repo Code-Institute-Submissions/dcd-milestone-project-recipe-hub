@@ -1,0 +1,19 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'avenir', sans-serif;
+  color: #ffffff;
+  background-color: #f72265;
+}
+/* Navbar styling */
+.navbar-nav {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  background-color: #ffffff;
+  color: #f72265;
+}

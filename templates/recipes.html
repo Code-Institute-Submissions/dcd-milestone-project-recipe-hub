@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RecipeHub</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    </head>
+    <body>
+        <nav class="navbar-nav">
+            <h1>RecipeHub <i class="fas fa-utensils"></i></h1>
+        </nav>
+        {% for recipe in recipes %}
+            <h2>{{recipe.name}}</h2>
+            <h3>Prep time: {{recipe.prep_time}}</h3>
+            <h3>Cooking time: {{recipe.cooking_time}}</h3>
+            <br>
+        {% endfor %}
+    </body>
+</html>
