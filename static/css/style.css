@@ -3,17 +3,72 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'avenir', sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: #ffffff;
-  background-color: #f72265;
+  background-color: #0ea7b5;
 }
-/* Navbar styling */
-.navbar-nav {
-  margin: 0;
-  list-style: none;
-  padding: 0;
-  width: 100%;
+.nav {
+  background-color: #0c457d;
+}
+.brand-logo {
+  margin-left: 20px;
   display: flex;
+}
+nav .brand-logo i {
+  float: right;
+  margin-left: 10px;
+}
+nav .button-collapse {
+  float: right;
+}
+nav .input-field{
+  background-color: #ffbe4f;
+}
+.input-field {
+  margin: 20px;
+}
+.login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.form_container {
   background-color: #ffffff;
-  color: #f72265;
+  margin: 40px;
+  padding: 20px;
+  border-radius: 4px;
+  color: #000;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.heading {
+  width: 100%;
+  font-size: 2rem;
+}
+.instruction {
+  font-size: 1.5rem;
+}
+.recipe_container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.recipe_card {
+  background: #fff;
+   color: #2c2c2c;
+   padding: 10px 15px;
+   border-radius: 4px;
+   margin: 10px;
+   width: 20%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+}
+.recipe_image {
+  width: 100%;
+  border-radius: 4px;
 }

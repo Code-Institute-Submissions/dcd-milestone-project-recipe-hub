@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RecipeHub</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+    </head>
+    <body>
+        <nav class="nav" role="navigation">
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">RecipeHub</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="#">Login</a></li>
+                <li><a class="waves-effect blue waves-light btn">Sign up</a></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Sign up</a></li>
+              </ul>
+            </div>
+          </nav>
+          <nav>
+            <div class="nav-wrapper">
+              <form>
+                <div class="input-field">
+                  <input id="search" type="search" required>
+                  <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+            </div>
+          </nav>
+        {% block content %}{% endblock %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript">
+            $('.button-collapse').sideNav({
+              menuWidth: 300,
+              edge: 'left',
+              closeOnClick: true
+            }
+          );
+        </script>
+    </body>
+</html>
