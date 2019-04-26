@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <p class="heading">Browse recipes or sign in to add your own!</p>
     <div class="recipe_container">
     {% for recipe in recipes %}
-        
+        {% if loop.index < 9 %}
         <div class="recipe_card">
             <p>{{recipe.name}}</p>
             <img src="{{recipe.image}}" alt="" class="recipe_image" />
+            <div class="thumb-container">
+                <div class="likes">
+                    <!--Replace with likes-->
+                    <p class="number-of-likes">2</p>
+                    <i class="material-icons">thumb_up</i>
+                </div>
+            </div>
         </div>
+        {% endif %}
     {% endfor %}
     </div>
 {% endblock %}
