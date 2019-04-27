@@ -12,12 +12,18 @@
               <a href="{{url_for('home')}}" class="brand-logo">RecipeHub</a>
               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
-                <li><a href="{{url_for('login')}}">Login</a></li>
-                <li><a href="{{url_for('signup')}}" class="waves-effect blue waves-light btn">Sign up</a></li>
+                {% if session['username'] %}
+                  <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
+                {% else %}
+                  <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
+                {% endif %}
               </ul>
               <ul class="side-nav" id="mobile-demo">
-                <li><a href="{{url_for('login')}}">Login</a></li>
-                <li><a href="{{url_for('signup')}}">Sign up</a></li>
+                {% if session['username'] %}
+                  <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
+                {% else %}
+                  <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
+                {% endif %}
               </ul>
             </div>
           </nav>

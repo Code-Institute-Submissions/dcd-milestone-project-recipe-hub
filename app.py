@@ -1,27 +1,54 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, flash, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 app.config["MONGO_DBNAME"] = 'recipe_hub'
 app.config["MONGO_URI"] = 'mongodb://admin:s040793@ds229186.mlab.com:29186/recipe_hub'
 
 mongo = PyMongo(app)
 
+# MongoDB collections
+
+users_collection = mongo.db.users
+recipes_collection = mongo.db.recipes
+categories_collection = mongo.db.categories
+
+# Routes
+
 @app.route('/')
 def home():
     return render_template("home.html",
     recipes=mongo.db.recipes.find())
 
-@app.route('/login')
+@app.route('/login', methods=["POST", "GET"])
 def login():
-    return render_template("login.html")
+	if request.method == "POST":
+		session['username'] = request.form["username"]
+		
+		if session['username'] == "":
+			return render_template("login.html")
+		else:
+			return redirect("/loggedin/" + session['username'])
+	return render_template("login.html")
+
     
-@app.route('/signup')
-def signup():
-    return render_template("signup.html")
+@app.route('/loggedin/<username>', methods=["GET", "POST"])
+def loggedin(username):
+    return render_template(
+    	"home.html",
+    	username=session['username'],
+    	recipes=mongo.db.recipes.find()
+    )
+
+@app.route('/logout')
+def logout():
+	session.clear()
+	flash('You were logged out!')
+	return redirect(url_for('home'))    
 
 @app.route('/add_recipe')
 def add_recipe():
