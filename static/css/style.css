@@ -5,7 +5,7 @@ html, body {
   padding: 0;
   font-family: 'Nunito', sans-serif;
   color: #ffffff;
-  background-color: #0ea7b5;
+  background-color: #0a1a2a;
 }
 .nav {
   background-color: #0c457d;
@@ -54,6 +54,7 @@ nav .input-field{
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+  justify-content: center;
 }
 .recipe_card {
   background: #fff;
@@ -114,4 +115,10 @@ nav .input-field{
 }
 .number-of-likes {
   padding-right: 5px;
+}
+.select-wrapper .caret {
+  padding-right: 20px;
+}
+nav .input-field label {
+  top: -10px;
 }

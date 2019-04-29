@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p class="heading">My Recipes</p>
+    <div class="recipe_container">
+    {% for recipe in recipes %}
+        {% if loop.index < 9 %}
+        <div class="recipe_card">
+            <p>{{recipe.name}}</p>
+            <img src="{{recipe.image}}" alt="" class="recipe_image" />
+            <div class="thumb-container">
+                <div class="likes">
+                    <!--Replace with likes-->
+                    <p class="number-of-likes">2</p>
+                    <i class="material-icons">thumb_up</i>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    <div class="recipe_card">
+        <p class="heading">Click the 'Add Recipe' button to add more!</p>
+        <button onclick="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</button>
+    </div>
+    </div>
+{% endblock %}

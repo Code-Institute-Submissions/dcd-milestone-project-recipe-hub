@@ -19,10 +19,11 @@ categories_collection = mongo.db.categories
 
 # Routes
 
-@app.route('/')
+@app.route('/', methods=["POST", "GET"])
 def home():
     return render_template("home.html",
-    recipes=mongo.db.recipes.find())
+    recipes=mongo.db.recipes.find(),
+    search_filter=mongo.db.categories.find())
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
@@ -39,9 +40,9 @@ def login():
 @app.route('/loggedin/<username>', methods=["GET", "POST"])
 def loggedin(username):
     return render_template(
-    	"home.html",
+    	"profile.html",
     	username=session['username'],
-    	recipes=mongo.db.recipes.find()
+    	recipes=mongo.db.recipes.find( { "added_by" : session['username']})
     )
 
 @app.route('/logout')
@@ -57,11 +58,19 @@ def add_recipe():
 @app.route('/categories')
 def categories():
     return render_template("categories.html",
-    recipes=mongo.db.recipes.find())
+    search_filter=mongo.db.categories.find(),
+    categories=mongo.db.categories.find())
 
 @app.route('/add_category')
 def add_category():
     return render_template("addcategory.html")
+
+@app.route('/insert_category', methods=['POST'])
+def insert_category():
+    categories = mongo.db.categories
+    category_doc = {'category_name': request.form['category_name']}
+    categories.insert_one(category_doc)
+    return redirect(url_for('categories'))
     
 @app.route('/recipe')
 def recipe():

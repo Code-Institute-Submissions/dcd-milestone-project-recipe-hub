@@ -6,16 +6,16 @@
             <div class="heading_container">
                 <p class="heading">Manage Categories</p>
             </div>
-                {% for recipe in recipes %}
+                {% for category in categories %}
                     <div class="category_container">
-                        <p>{{recipe.category}}</p>
+                        <p>{{category.category_name}}</p>
                         <div class="button_container">
                             <button class="btn waves-effect waves-light" type="submit" name="action">Edit</button>
                             <button class="btn waves-effect waves-light red" type="submit" name="action">Delete</button>
                         </div>
                     </div>
                 {% endfor %}
-            <button class="btn waves-effect waves-light action-button" type="submit" name="action">Add Category</button>
+            <a class="btn waves-effect waves-light action-button" href="{{url_for('add_category')}}">Add Category</a>
         </div>
     </div>
 {% endblock %}

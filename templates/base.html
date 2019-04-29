@@ -13,6 +13,9 @@
               <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 {% if session['username'] %}
+                  <li><a href="{{url_for('loggedin', username=session['username'])}}" class="waves-effect blue waves-light btn">My Recipes</a></li>
+                  <li><a href="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</a></li>
+                  <li><a href="{{url_for('categories')}}" class="waves-effect blue waves-light btn">Manage Categories</a></li>
                   <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
                 {% else %}
                   <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
@@ -20,6 +23,9 @@
               </ul>
               <ul class="side-nav" id="mobile-demo">
                 {% if session['username'] %}
+                  <li><a href="{{url_for('loggedin', username=session['username'])}}" class="waves-effect blue waves-light btn">My Recipes</a></li>
+                  <li><a href="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</a></li>
+                  <li><a href="{{url_for('categories')}}" class="waves-effect blue waves-light btn">Manage Categories</a></li>
                   <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
                 {% else %}
                   <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
@@ -30,9 +36,9 @@
           <nav class="search-nav">
             <div class="search-wrapper">
                 <div class="nav-wrapper">
-                  <form>
+                  <form method="GET">
                     <div class="input-field">
-                      <input id="search" type="search" required>
+                      <input id="search" name="search" type="search" required>
                       <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                       <i class="material-icons">close</i>
                     </div>
@@ -44,8 +50,9 @@
                   <div class="input-field col s12">
                     <select>
                       <option value="" disabled selected>Filter by:</option>
-                      <option value="1">Cuisine</option>
-                      <option value="1">Category</option>
+                      {% for filter in search_filter %}
+                        <option>{{filter.category_name}}</option>
+                      {% endfor %}
                     </select>
                   </div>
                 </div>
