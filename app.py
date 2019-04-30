@@ -53,7 +53,12 @@ def logout():
 
 @app.route('/add_recipe')
 def add_recipe():
-    return render_template("addrecipe.html")
+    return render_template("addrecipe.html",
+    categories=mongo.db.categories.find())
+
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    return redirect(url_for('loggedin'))
 
 @app.route('/categories')
 def categories():
@@ -95,12 +100,6 @@ def update_category(category_id):
 @app.route('/recipe')
 def recipe():
     return render_template("recipe.html")
-
-@app.route('/get_recipes')
-def get_recipes():
-    return render_template("getrecipes.html",
-    recipes=mongo.db.recipes.find())
-
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

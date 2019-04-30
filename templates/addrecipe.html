@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="recipe">
+        <div class="form_container">
+            <p class="heading">Add Recipe</p>
+            <form action="{{ url_for('insert_recipe') }}" method="POST" class="add-recipe">
+                <div class="input-field">
+                    <select>
+                      <option value="" disabled selected>Category</option>
+                      {% for category in categories %}
+                        <option>{{category.category_name}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+                <div class="add-recipe-fields">
+                    <div class="input-field">
+                        <input id="icon_prefix" type="text" class="validate" id="recipe_name" name="recipe_name">
+                        <label for="icon_prefix">Recipe name</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="icon_prefix" type="number" class="validate" id="serves" name="serves">
+                        <label for="icon_prefix" data-error="Please enter a number">Serves</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking">
+                        <label for="icon_prefix">Cooking time</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="icon_prefix" type="text" class="validate" id="allergen" name="allergen">
+                        <label for="icon_prefix">Allergens</label>
+                    </div>
+                    <div class="input-field">
+                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="ingredients" name="ingredients"></textarea>
+                        <label for="icon_prefix">Ingredients</label>
+                    </div>
+                    <div class="input-field">
+                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method"></textarea>
+                        <label for="icon_prefix">Method</label>
+                    </div>
+                    <div class="input-field">
+                        <input disabled value="{{session['username']}}" id="author" name="author" type="text" class="validate">
+                        <label for="author_name">Author</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add</button>
+            </form>
+            <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
+        </div>
+    </div>
+{% endblock %}

@@ -24,7 +24,7 @@ nav .button-collapse {
 nav .input-field{
   background-color: #ffbe4f;
 }
-.login, .signup, .category {
+.login, .signup, .category, .recipe {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -121,4 +121,11 @@ nav .input-field{
 }
 nav .input-field label {
   top: -10px;
+}
+.add-recipe {
+  width: 100%;
+}
+.add-recipe-fields {
+  padding-left: 10px;
+  padding-right: 10px;
 }

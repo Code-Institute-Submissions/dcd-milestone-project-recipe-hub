@@ -20,7 +20,7 @@
     {% endfor %}
     <div class="recipe_card">
         <p class="heading">Click the 'Add Recipe' button to add more!</p>
-        <button onclick="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</button>
+        <a href="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</a>
     </div>
     </div>
 {% endblock %}
