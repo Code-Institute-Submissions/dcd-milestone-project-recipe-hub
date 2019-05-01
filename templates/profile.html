@@ -2,23 +2,25 @@
 
 {% block content %}
     <p class="heading">My Recipes</p>
-    <div class="recipe_container">
+    <div class="flex-container">
     {% for recipe in recipes %}
         {% if loop.index < 9 %}
-        <div class="recipe_card">
-            <p>{{recipe.name}}</p>
-            <img src="{{recipe.image}}" alt="" class="recipe_image" />
-            <div class="thumb-container">
-                <div class="likes">
-                    <!--Replace with likes-->
-                    <p class="number-of-likes">2</p>
-                    <i class="material-icons">thumb_up</i>
+        <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
+            <div class="recipe-card">
+                <p>{{recipe.name}}</p>
+                <img src="{{recipe.image}}" alt="" class="recipe_image" />
+                <div class="thumb-container">
+                    <div class="likes">
+                        <!--Replace with likes-->
+                        <p class="number-of-likes">2</p>
+                        <i class="material-icons">thumb_up</i>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
         {% endif %}
     {% endfor %}
-    <div class="recipe_card">
+    <div class="recipe-card">
         <p class="heading">Click the 'Add Recipe' button to add more!</p>
         <a href="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</a>
     </div>

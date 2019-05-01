@@ -6,7 +6,7 @@
             <p class="heading">Add Recipe</p>
             <form action="{{ url_for('insert_recipe') }}" method="POST" class="add-recipe">
                 <div class="input-field">
-                    <select>
+                    <select name="category_name" id="category_name">
                       <option value="" disabled selected>Category</option>
                       {% for category in categories %}
                         <option>{{category.category_name}}</option>
@@ -15,28 +15,56 @@
                 </div>
                 <div class="add-recipe-fields">
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="recipe_name" name="recipe_name">
+                        <input id="icon_prefix" type="text" class="validate" id="name" name="name">
                         <label for="icon_prefix">Recipe name</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="icon_prefix" type="number" class="validate" id="serves" name="serves">
-                        <label for="icon_prefix" data-error="Please enter a number">Serves</label>
                     </div>
                     <div class="input-field">
                         <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking">
                         <label for="icon_prefix">Cooking time</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="allergen" name="allergen">
-                        <label for="icon_prefix">Allergens</label>
+                        <input id="icon_prefix" type="text" class="validate" id="prep" name="prep">
+                        <label for="icon_prefix">Prep time</label>
                     </div>
                     <div class="input-field">
-                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="ingredients" name="ingredients"></textarea>
-                        <label for="icon_prefix">Ingredients</label>
+                        <input id="icon_prefix" type="text" class="validate" id="serves" name="serves">
+                        <label for="icon_prefix">Serves</label>
                     </div>
+                    <div class="input-field">
+                        <input disabled value="Default Image" id="default_image" name="default_image" type="text" class="validate default_image">
+                        <label for="default_image">Image</label>
+                    </div>
+                    <p>Allergens</p>
+                    {% for allergen in allergens %}
+                    <p>
+                        <input type="checkbox" id="check-{{allergen.name}}" value="{{allergen.name}}" name="allergen" class="filled-in" />
+                        <label for="check-{{allergen.name}}">{{allergen.name}}</label>
+                    </p>
+                    {% endfor %}
+                    <div id="field-section">
+                        <div id="form-field">
+                            <div class="field">
+                                <div class="input-field">
+                                    <input type="text" class="validate" id="quantity" name="quantity" />
+                                    <label for="quantity">Quantity</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="input-field">
+                                    <input type="text" class="validate" id="ingredient" name="ingredient" />
+                                    <label for="ingredient">Ingredient</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
                     <div class="input-field">
                         <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method"></textarea>
                         <label for="icon_prefix">Method</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine">
+                        <label for="icon_prefix">Cuisine</label>
                     </div>
                     <div class="input-field">
                         <input disabled value="{{session['username']}}" id="author" name="author" type="text" class="validate">
@@ -48,4 +76,11 @@
             <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
         </div>
     </div>
+    <script>
+        document.getElementById("add-ingredient-btn").onclick = function() {
+          var container = document.getElementById("field-section");
+          var section = document.getElementById("form-field");
+          container.appendChild(section.cloneNode(true));
+        }
+    </script>
 {% endblock %}

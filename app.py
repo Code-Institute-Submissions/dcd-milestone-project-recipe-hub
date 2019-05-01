@@ -17,6 +17,8 @@ users_collection = mongo.db.users
 recipes_collection = mongo.db.recipes
 categories_collection = mongo.db.categories
 
+default_image = 'https://zabas.com/wp-content/uploads/2014/06/placeholder-food-hover.png'
+
 # Routes
 
 @app.route('/', methods=["POST", "GET"])
@@ -54,11 +56,26 @@ def logout():
 @app.route('/add_recipe')
 def add_recipe():
     return render_template("addrecipe.html",
-    categories=mongo.db.categories.find())
+    categories=mongo.db.categories.find(),
+    allergens=mongo.db.allergens.find())
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    return redirect(url_for('loggedin'))
+    recipes=mongo.db.recipes
+    recipes.insert_one({
+        'category':request.form.get('category_name'),
+        'name':request.form.get('name'),
+        'cooking_time':request.form.get('cooking'),
+        'prep_time':request.form.get('prep'),
+        'serves':request.form.get('serves'),
+        'image': default_image,
+        'added_by':session['username'],
+        'allergens':request.form.getlist('allergen'),
+        'ingredients': [{ "name" : request.form.getlist('ingredient'), "quantity": request.form.getlist('quantity')}],
+        'method':request.form.get('method'),
+        'cuisine':request.form.get('cuisine'),
+    })
+    return redirect(url_for('loggedin', username=session['username']))
 
 @app.route('/categories')
 def categories():
@@ -97,9 +114,12 @@ def update_category(category_id):
         {'category_name': request.form['category_name']})
     return redirect(url_for('categories'))
     
-@app.route('/recipe')
-def recipe():
-    return render_template("recipe.html")
+@app.route('/recipe/<recipe_id>')
+def recipe(recipe_id):
+    recipe=mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("recipe.html",
+    search_filter=mongo.db.categories.find(),
+    recipe=recipe)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
