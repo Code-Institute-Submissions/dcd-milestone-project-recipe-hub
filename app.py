@@ -71,7 +71,7 @@ def insert_recipe():
         'image': default_image,
         'added_by':session['username'],
         'allergens':request.form.getlist('allergen'),
-        'ingredients': [{ "name" : request.form.getlist('ingredient'), "quantity": request.form.getlist('quantity')}],
+        'ingredients': request.form.getlist('ingredient'),
         'method':request.form.get('method'),
         'cuisine':request.form.get('cuisine'),
     })

@@ -13,7 +13,7 @@
                 <div class="padding">
                     <p class="recipe-header">Ingredients</p>
                     {% for ingredient in recipe.ingredients %}
-                        <p>{{ingredient.quantity[0]}} {{ingredient.name[0]}}</p>
+                        <p>{{ingredient}}</p>
                     {% endfor %}
                     <p class="recipe-header">Method</p>
                     <p>{{recipe.method}}</p>

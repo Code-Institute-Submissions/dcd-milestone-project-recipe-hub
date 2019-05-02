@@ -43,17 +43,9 @@
                     {% endfor %}
                     <div id="field-section">
                         <div id="form-field">
-                            <div class="field">
-                                <div class="input-field">
-                                    <input type="text" class="validate" id="quantity" name="quantity" />
-                                    <label for="quantity">Quantity</label>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="input-field">
-                                    <input type="text" class="validate" id="ingredient" name="ingredient" />
-                                    <label for="ingredient">Ingredient</label>
-                                </div>
+                            <div class="input-field">
+                                <input type="text" class="validate" id="ingredient" name="ingredient" />
+                                <label for="ingredient">Ingredient (e.g. 100g Flour)</label>
                             </div>
                         </div>
                     </div>
@@ -82,5 +74,6 @@
           var section = document.getElementById("form-field");
           container.appendChild(section.cloneNode(true));
         }
+        
     </script>
 {% endblock %}
