@@ -1,80 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>RecipeHub</title>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    </head>
-    <body>
-        <nav class="nav" role="navigation">
-            <div class="nav-wrapper">
-              <a href="{{url_for('home')}}" class="brand-logo">RecipeHub</a>
-              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-              <ul class="right hide-on-med-and-down">
-                {% if session['username'] %}
-                  <li><a href="{{url_for('loggedin', username=session['username'])}}" class="waves-effect blue waves-light btn">My Recipes</a></li>
-                  <li><a href="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</a></li>
-                  <li><a href="{{url_for('categories')}}" class="waves-effect blue waves-light btn">Manage Categories</a></li>
-                  <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
-                {% else %}
-                  <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
-                {% endif %}
-              </ul>
-              <ul class="side-nav" id="mobile-demo">
-                {% if session['username'] %}
-                  <li><a href="{{url_for('loggedin', username=session['username'])}}" class="waves-effect blue waves-light btn">My Recipes</a></li>
-                  <li><a href="{{url_for('add_recipe')}}" class="waves-effect blue waves-light btn">Add Recipe</a></li>
-                  <li><a href="{{url_for('categories')}}" class="waves-effect blue waves-light btn">Manage Categories</a></li>
-                  <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
-                {% else %}
-                  <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
-          <nav class="search-nav">
-            <div class="search-wrapper">
-                <div class="nav-wrapper">
-                  <form method="GET">
-                    <div class="input-field">
-                      <input id="search" name="search" type="search" required>
-                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                      <i class="material-icons">close</i>
-                    </div>
-                  </form>
-                </div>
-            </div>
-            <div class="secondary-nav">
-                <div class="nav-wrapper">
-                  <div class="input-field col s12">
-                    <select>
-                      <option value="" disabled selected>Filter by:</option>
-                      {% for filter in search_filter %}
-                        <option>{{filter.category_name}}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-            </div>
-          </nav>
-        {% block content %}{% endblock %}
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <script src="{{ url_for('static', filename='css/style.css') }}"></script>
-        <script type="text/javascript">
-            $('.button-collapse').sideNav({
-              menuWidth: 300,
-              edge: 'left',
-              closeOnClick: true
-            }
-          );
+<head>
+    <title>RecipeHub</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
 
-          $(document).ready(function() {
-            $('select').material_select();
-         });
-        </script>
-    </body>
+<body>
+    <nav class="nav" role="navigation">
+        <div class="nav-wrapper">
+            <a href="{{url_for('home')}}" class="brand-logo">RecipeHub</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              {% if session['username'] %}
+                <li><a href="{{url_for('loggedin', username=session['username'])}}" class="waves-effect blue waves-light btn">My Recipes</a></li>
+                <li><a href="{{url_for('add_recipe')}}" class="waves-effect  orange accent-2 waves-light btn">Add Recipe</a></li>
+                <li><a href="{{url_for('categories')}}" class="waves-effect orange darken-2 waves-light btn">Manage Categories</a></li>
+                <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
+              {% else %}
+                <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
+              {% endif %}
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              {% if session['username'] %}
+                <li><a href="{{url_for('loggedin', username=session['username'])}}" class="waves-effect blue waves-light btn">My Recipes</a></li>
+                <li><a href="{{url_for('add_recipe')}}" class="waves-effect orange accent-2 waves-light btn">Add Recipe</a></li>
+                <li><a href="{{url_for('categories')}}" class="waves-effect orange darken-2 waves-light btn">Manage Categories</a></li>
+                <li><a href="{{url_for('logout')}}" class="waves-effect red waves-light btn">Log Out</a></li>
+              {% else %}
+                <li><a href="{{url_for('login')}}" class="waves-effect blue waves-light btn">Login</a></li>
+              {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!--<nav class="search-nav">-->
+    <!--  <div class="search-wrapper">-->
+    <!--      <div class="nav-wrapper">-->
+    <!--        <form method="GET">-->
+    <!--          <div class="input-field">-->
+    <!--            <input id="search" name="search" type="search" required>-->
+    <!--            <label class="label-icon" for="search"><i class="material-icons">search</i></label>-->
+    <!--            <i class="material-icons">close</i>-->
+    <!--          </div>-->
+    <!--        </form>-->
+    <!--      </div>-->
+    <!--  </div>-->
+    <!--  <div class="secondary-nav">-->
+    <!--      <div class="nav-wrapper">-->
+    <!--        <div class="input-field col s12">-->
+    <!--          <select>-->
+    <!--            <option value="" disabled selected>Filter by:</option>-->
+    <!--            {% for filter in search_filter %}-->
+    <!--              <option>{{filter.category_name}}</option>-->
+    <!--            {% endfor %}-->
+    <!--          </select>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--  </div>-->
+    <!--</nav>-->
+    {% block content %}{% endblock %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+    <script type="text/javascript">
+        $('.button-collapse').sideNav({
+            menuWidth: 300,
+            edge: 'left',
+            closeOnClick: true
+        });
+    </script>
+</body>
+
 </html>

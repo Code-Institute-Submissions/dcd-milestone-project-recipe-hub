@@ -6,7 +6,7 @@
             <p class="heading">Edit Recipe</p>
             <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="add-recipe">
                 <div class="input-field">
-                    <select name="category_name" id="category_name">
+                    <select name="category_name" id="category_name" class="validate" required="required">
                         <option value="" disabled selected>Category</option>
                         {% for cat in categories %}
                               {% if cat.category_name == recipe.category %}
@@ -19,19 +19,19 @@
                 </div>
                 <div class="add-recipe-fields">
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="name" name="name" value="{{recipe.name}}">
+                        <input id="icon_prefix" type="text" class="validate" id="name" name="name" value="{{recipe.name}}" required>
                         <label for="icon_prefix">Recipe name</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking" value="{{recipe.cooking_time}}">
+                        <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking" value="{{recipe.cooking_time}}" required>
                         <label for="icon_prefix">Cooking time</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="prep" name="prep" value="{{recipe.prep_time}}">
+                        <input id="icon_prefix" type="text" class="validate" id="prep" name="prep" value="{{recipe.prep_time}}" required>
                         <label for="icon_prefix">Prep time</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="serves" name="serves" value="{{recipe.serves}}">
+                        <input id="icon_prefix" type="text" class="validate" id="serves" name="serves" value="{{recipe.serves}}" required>
                         <label for="icon_prefix">Serves</label>
                     </div>
                     <div class="input-field">
@@ -53,7 +53,7 @@
                         <div id="form-field">
                             {% for ingredient in recipe.ingredients %}
                                 <div class="input-field">
-                                    <input type="text" class="validate" id="ingredient" name="ingredient" value="{{ingredient}}"/>
+                                    <input type="text" class="validate" id="ingredient" name="ingredient" value="{{ingredient}}" required/>
                                     <label for="ingredient">Ingredient (e.g. 100g Flour)</label>
                                 </div>
                             {% endfor %}
@@ -61,11 +61,11 @@
                     </div>
                     <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
                     <div class="input-field">
-                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method">{{recipe.method}}</textarea>
+                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method" required>{{recipe.method}}</textarea>
                         <label for="icon_prefix">Method</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine" value="{{recipe.cuisine}}">
+                        <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine" value="{{recipe.cuisine}}" required>
                         <label for="icon_prefix">Cuisine</label>
                     </div>
                     <div class="input-field">
@@ -78,12 +78,4 @@
             <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
         </div>
     </div>
-    <script>
-        document.getElementById("add-ingredient-btn").onclick = function() {
-          var container = document.getElementById("field-section");
-          var section = document.getElementById("form-field");
-          container.appendChild(section.cloneNode(true));
-        }
-        
-    </script>
 {% endblock %}

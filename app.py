@@ -40,10 +40,14 @@ def login():
     
 @app.route('/loggedin/<username>', methods=["GET", "POST"])
 def loggedin(username):
+    search_filter=mongo.db.categories.find()
+    recipes=mongo.db.recipes.find( { "added_by" : session['username']})
+    filtered_recipe=mongo.db.recipes.find( { "added_by": session['username']})
     return render_template(
     	"profile.html",
     	username=session['username'],
-    	recipes=mongo.db.recipes.find( { "added_by" : session['username']})
+    	recipes=recipes,
+    	search_filter=search_filter
     )
 
 @app.route('/logout')
