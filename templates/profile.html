@@ -9,6 +9,7 @@
             <div class="recipe-card">
                 <p>{{recipe.name}}</p>
                 <img src="{{recipe.image}}" alt="" class="recipe_image" />
+                <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect blue waves-light btn">Edit Recipe</a>
                 <!--<div class="thumb-container">-->
                 <!--    <div class="likes">-->
                         <!--Replace with likes-->

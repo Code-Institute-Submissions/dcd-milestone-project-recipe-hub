@@ -12,15 +12,14 @@ app.config["MONGO_URI"] = 'mongodb://admin:s040793@ds229186.mlab.com:29186/recip
 mongo = PyMongo(app)
 
 # MongoDB collections
-
 users_collection = mongo.db.users
 recipes_collection = mongo.db.recipes
 categories_collection = mongo.db.categories
 
+# Variables
 default_image = 'https://zabas.com/wp-content/uploads/2014/06/placeholder-food-hover.png'
 
 # Routes
-
 @app.route('/', methods=["POST", "GET"])
 def home():
     return render_template("home.html",
@@ -56,8 +55,7 @@ def logout():
 @app.route('/add_recipe')
 def add_recipe():
     return render_template("addrecipe.html",
-    categories=mongo.db.categories.find(),
-    allergens=mongo.db.allergens.find())
+    categories=mongo.db.categories.find())
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
@@ -70,12 +68,49 @@ def insert_recipe():
         'serves':request.form.get('serves'),
         'image': default_image,
         'added_by':session['username'],
-        'allergens':request.form.getlist('allergen'),
+        'is_vegan' : request.args.get("is_vegan"),
         'ingredients': request.form.getlist('ingredient'),
         'method':request.form.get('method'),
         'cuisine':request.form.get('cuisine'),
     })
     return redirect(url_for('loggedin', username=session['username']))
+
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    recipe=mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    search_filter=mongo.db.categories.find()
+    _categories=mongo.db.categories.find()
+    category_list = [category for category in _categories]
+    return render_template('editrecipe.html',
+    recipe=recipe,
+    search_filter=search_filter,
+    categories=category_list)
+    
+@app.route('/update_recipe/<recipe_id>', methods=['POST'])
+def update_recipe(recipe_id):
+    mongo.db.recipes.update(
+    {'_id': ObjectId(recipe_id)},
+    {
+        'category':request.form.get('category_name'),
+        'name':request.form.get('name'),
+        'cooking_time':request.form.get('cooking'),
+        'prep_time':request.form.get('prep'),
+        'image': default_image,
+        'serves':request.form.get('serves'),
+        'is_vegan' : request.args.get("is_vegan"),
+        'ingredients': request.form.getlist('ingredient'),
+        'method':request.form.get('method'),
+        'cuisine':request.form.get('cuisine'),
+        'added_by': session['username']
+    })
+    return redirect(url_for('loggedin', username=session['username']))
+    
+@app.route('/recipe/<recipe_id>')
+def recipe(recipe_id):
+    recipe=mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("recipe.html",
+    search_filter=mongo.db.categories.find(),
+    recipe=recipe)
 
 @app.route('/categories')
 def categories():
@@ -113,13 +148,6 @@ def update_category(category_id):
         {'_id': ObjectId(category_id)},
         {'category_name': request.form['category_name']})
     return redirect(url_for('categories'))
-    
-@app.route('/recipe/<recipe_id>')
-def recipe(recipe_id):
-    recipe=mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("recipe.html",
-    search_filter=mongo.db.categories.find(),
-    recipe=recipe)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

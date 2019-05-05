@@ -7,8 +7,13 @@
             <div class="recipe-contents">
                 <div>
                     <img src="{{recipe.image}}" class="image"/>
-                    <p>Cooking time: {{recipe.cooking_time}}</p>
-                    <p>Prep time: {{recipe.prep_time}}</p>
+                    <p><i class="material-icons">timer</i>Cooking time: {{recipe.cooking_time}}</p>
+                    <p><i class="material-icons">restaurant_menu</i>Prep time: {{recipe.prep_time}}</p>
+                    <p><i class="material-icons">person</i>Serves: {{recipe.serves}}</p>
+                    <p><i class="fas fa-folder-open"></i>Category: {{recipe.category}}</p>
+                    {% if recipe.is_vegan == 'on' %}
+                    <p><i class="fas fa-leaf"></i>Vegan</p>
+                    {% endif %}
                 </div>
                 <div class="padding">
                     <p class="recipe-header">Ingredients</p>

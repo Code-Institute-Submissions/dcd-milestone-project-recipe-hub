@@ -155,6 +155,10 @@ nav .input-field label {
   padding-left: 10px;
   padding-right: 10px;
 }
+.switch {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
 @media only screen and (max-width: 600px) {
   .flex-container {

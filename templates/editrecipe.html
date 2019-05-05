@@ -3,31 +3,35 @@
 {% block content %}
     <div class="recipe">
         <div class="form_container">
-            <p class="heading">Add Recipe</p>
-            <form action="{{ url_for('insert_recipe') }}" method="POST" class="add-recipe">
+            <p class="heading">Edit Recipe</p>
+            <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="add-recipe">
                 <div class="input-field">
                     <select name="category_name" id="category_name">
-                      <option value="" disabled selected>Category</option>
-                      {% for category in categories %}
-                        <option>{{category.category_name}}</option>
-                      {% endfor %}
+                        <option value="" disabled selected>Category</option>
+                        {% for cat in categories %}
+                              {% if cat.category_name == recipe.category %}
+                              <option value="{{recipe.category}}" selected >{{recipe.category}}</option>
+                              {% else %}
+                              <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                            {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="add-recipe-fields">
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="name" name="name">
+                        <input id="icon_prefix" type="text" class="validate" id="name" name="name" value="{{recipe.name}}">
                         <label for="icon_prefix">Recipe name</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking">
+                        <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking" value="{{recipe.cooking_time}}">
                         <label for="icon_prefix">Cooking time</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="prep" name="prep">
+                        <input id="icon_prefix" type="text" class="validate" id="prep" name="prep" value="{{recipe.prep_time}}">
                         <label for="icon_prefix">Prep time</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="serves" name="serves">
+                        <input id="icon_prefix" type="text" class="validate" id="serves" name="serves" value="{{recipe.serves}}">
                         <label for="icon_prefix">Serves</label>
                     </div>
                     <div class="input-field">
@@ -36,26 +40,32 @@
                     </div>
                     <div class="switch">
                         <label>
-                          <input id="is_vegan" name="is_vegan" type="checkbox">
+                            {% if recipe.is_vegan == "on" %}
+                              <input id="is_vegan" name="is_vegan" type="checkbox" checked>
+                             {% else %}
+                             <input id="is_vegan" name="is_vegan" type="checkbox">
+                            {% endif %}
                           <span class="lever"></span>
-                          Vegan?
+                          Is Vegan
                         </label>
                     </div>
                     <div id="field-section">
                         <div id="form-field">
-                            <div class="input-field">
-                                <input type="text" class="validate" id="ingredient" name="ingredient" />
-                                <label for="ingredient">Ingredient (e.g. 100g Flour)</label>
-                            </div>
+                            {% for ingredient in recipe.ingredients %}
+                                <div class="input-field">
+                                    <input type="text" class="validate" id="ingredient" name="ingredient" value="{{ingredient}}"/>
+                                    <label for="ingredient">Ingredient (e.g. 100g Flour)</label>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                     <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
                     <div class="input-field">
-                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method"></textarea>
+                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method">{{recipe.method}}</textarea>
                         <label for="icon_prefix">Method</label>
                     </div>
                     <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine">
+                        <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine" value="{{recipe.cuisine}}">
                         <label for="icon_prefix">Cuisine</label>
                     </div>
                     <div class="input-field">
@@ -63,7 +73,7 @@
                         <label for="author_name">Author</label>
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Add</button>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Save Changes</button>
             </form>
             <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
         </div>
@@ -74,5 +84,6 @@
           var section = document.getElementById("form-field");
           container.appendChild(section.cloneNode(true));
         }
+        
     </script>
 {% endblock %}
