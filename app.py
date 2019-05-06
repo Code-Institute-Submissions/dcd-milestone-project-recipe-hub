@@ -3,6 +3,7 @@ import env
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
+from flask_bcrypt import bcrypt
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -14,6 +15,7 @@ mongo = PyMongo(app)
 
 # MongoDB collections
 
+users_collection = mongo.db.users
 recipes_collection = mongo.db.recipes
 categories_collection = mongo.db.categories
 
@@ -51,13 +53,29 @@ def filter_list(category_name):
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
-
-        if session['username'] == '':
-            return render_template('login.html')
-        else:
+        existing_user = users_collection.find_one(
+            {'name': request.form.get('username')})
+        if existing_user:
+            session['username'] = request.form.get('username')
             return redirect('/loggedin/' + session['username'])
+        return redirect(url_for('signup'))
     return render_template('login.html')
+
+
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
+    if request.method == 'POST':
+        existing_user = \
+            users_collection.find_one(
+                {'name': request.form.get('username')})
+        if existing_user is None:
+            hashpass = bcrypt.hashpw(request.form.get('password')
+                                     .encode('utf-8'), bcrypt.gensalt())
+            users_collection.insert(
+                {'name': request.form.get('username'), 'password': hashpass})
+            session['username'] = request.form.get('username')
+            return redirect('/loggedin/' + session['username'])
+    return render_template('signup.html')
 
 
 @app.route('/loggedin/<username>', methods=['GET', 'POST'])
@@ -128,7 +146,7 @@ def update_recipe(recipe_id):
         'added_by': session['username'],
         })
     return redirect(url_for('loggedin', username=session['username']))
-    
+
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):

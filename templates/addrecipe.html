@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% if session.username %}
     <div class="recipe">
         <div class="form_container">
             <p class="heading">Add Recipe</p>
@@ -71,4 +72,14 @@
             <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
         </div>
     </div>
+    {% else %}
+    <div class="login">
+        <div class="form_container">
+            <header>
+                <p class="heading">You will need to sign in to view this information</p>
+            </header>
+            <a href="{{url_for('login')}}" class="waves-effect orange accent-2 waves-light btn">Login</a>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
