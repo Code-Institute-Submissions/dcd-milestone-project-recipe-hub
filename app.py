@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 app.config['MONGO_DBNAME'] = 'recipe_hub'
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.config['MONGO_URI'] = "mongodb://admin:s040793@ds229186.mlab.com:29186/recipe_hub"
 
 mongo = PyMongo(app)
 
@@ -40,8 +40,7 @@ def home():
 def filter_list(category_name):
     categories = list(categories_collection.find())
     category_name = categories_collection.find_one(
-        {'category_name': category_name}
-        )
+        {'category_name': category_name})
     recipes = recipes_collection.find()
     return render_template(
         'filter.html',
