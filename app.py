@@ -1,8 +1,6 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 import os
 from flask import Flask, render_template, redirect, request, url_for, session
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
@@ -30,8 +28,9 @@ default_image = \
 @app.route('/', methods=['POST', 'GET'])
 def home():
     categories = categories_collection.find()
+    recipes = recipes_collection.find().sort('name', pymongo.ASCENDING)
     return render_template('home.html',
-                           recipes=recipes_collection.find(),
+                           recipes=recipes,
                            categories=categories)
 
 
@@ -49,7 +48,9 @@ def login():
 
 @app.route('/loggedin/<username>', methods=['GET', 'POST'])
 def loggedin(username):
-    recipes = recipes_collection.find({'added_by': session['username']})
+    recipes = \
+        recipes_collection.find({'added_by': session['username']})\
+        .sort('name', pymongo.ASCENDING)
     return render_template(
         'profile.html',
         username=session['username'],
@@ -123,8 +124,10 @@ def recipe(recipe_id):
 
 @app.route('/categories')
 def categories():
+    categories = \
+        categories_collection.find().sort('category_name', pymongo.ASCENDING)
     return render_template('categories.html',
-                           categories=categories_collection.find())
+                           categories=categories)
 
 
 @app.route('/add_category')
