@@ -1,4 +1,5 @@
 import os
+import env
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
@@ -7,8 +8,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 app.config['MONGO_DBNAME'] = 'recipe_hub'
-app.config['MONGO_URI'] = \
-    'mongodb://admin:s040793@ds229186.mlab.com:29186/recipe_hub'
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 
 mongo = PyMongo(app)
 
@@ -27,19 +27,16 @@ default_image = \
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-    categories = categories_collection.find()
-    mobile_categories = categories_collection.find()
+    categories = list(categories_collection.find())
     recipes = recipes_collection.find().sort('name', pymongo.ASCENDING)
     return render_template('home.html',
                            recipes=recipes,
-                           categories=categories,
-                           mobile_categories=mobile_categories)
+                           categories=categories)
 
 
 @app.route('/<category_name>', methods=['GET'])
 def filter_list(category_name):
-    categories = categories_collection.find()
-    mobile_categories = categories_collection.find()
+    categories = list(categories_collection.find())
     category_name = categories_collection.find_one(
         {'category_name': category_name}
         )
@@ -48,8 +45,7 @@ def filter_list(category_name):
         'filter.html',
         categories=categories,
         category_name=category_name,
-        recipes=recipes,
-        mobile_categories=mobile_categories)
+        recipes=recipes)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -132,6 +128,12 @@ def update_recipe(recipe_id):
         'added_by': session['username'],
         })
     return redirect(url_for('loggedin', username=session['username']))
+    
+
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    recipes_collection.remove({'_id': ObjectId(recipe_id)})
+    return redirect(url_for('loggedin', username=session['username']))
 
 
 @app.route('/recipe/<recipe_id>')
@@ -155,9 +157,8 @@ def add_category():
 
 @app.route('/insert_category', methods=['POST'])
 def insert_category():
-    categories = categories_collection
     category_doc = {'category_name': request.form['category_name']}
-    categories.insert_one(category_doc)
+    categories_collection.insert_one(category_doc)
     return redirect(url_for('categories'))
 
 

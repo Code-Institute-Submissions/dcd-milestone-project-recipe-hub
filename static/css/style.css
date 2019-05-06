@@ -74,7 +74,7 @@ nav .button-collapse {
   color: #000000;
   border-radius: 4px;
   height: 400px;
-  padding: 10px;
+  padding: 30px;
   margin: 20px;
   justify-content: center;
   text-align: center;
@@ -146,6 +146,15 @@ a {
 .switch {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+.recipe-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+}
+.edit, .delete {
+  margin: 20px;
 }
 /*Images*/
 .recipe_image {
