@@ -28,10 +28,28 @@ default_image = \
 @app.route('/', methods=['POST', 'GET'])
 def home():
     categories = categories_collection.find()
+    mobile_categories = categories_collection.find()
     recipes = recipes_collection.find().sort('name', pymongo.ASCENDING)
     return render_template('home.html',
                            recipes=recipes,
-                           categories=categories)
+                           categories=categories,
+                           mobile_categories=mobile_categories)
+
+
+@app.route('/<category_name>', methods=['GET'])
+def filter_list(category_name):
+    categories = categories_collection.find()
+    mobile_categories = categories_collection.find()
+    category_name = categories_collection.find_one(
+        {'category_name': category_name}
+        )
+    recipes = recipes_collection.find()
+    return render_template(
+        'filter.html',
+        categories=categories,
+        category_name=category_name,
+        recipes=recipes,
+        mobile_categories=mobile_categories)
 
 
 @app.route('/login', methods=['POST', 'GET'])

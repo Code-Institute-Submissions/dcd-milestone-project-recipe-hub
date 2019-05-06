@@ -22,6 +22,13 @@ nav .brand-logo i {
 nav .button-collapse {
   float: right;
 }
+.filter-nav {
+  background-color: #ffab40;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 /*Containers*/
 .login, .signup, .category, .recipe {
   display: flex;
@@ -32,7 +39,7 @@ nav .button-collapse {
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 .form_container {
@@ -67,8 +74,8 @@ nav .button-collapse {
   color: #000000;
   border-radius: 4px;
   height: 400px;
-  padding: 10px 20px;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin: 20px;
   justify-content: center;
   text-align: center;
 }
@@ -126,6 +133,9 @@ a {
 }
 .action-button {
   margin-top: 30px;
+}
+.filter-btn {
+  margin-right: 20px;
 }
 .add-recipe {
   width: 100%;
