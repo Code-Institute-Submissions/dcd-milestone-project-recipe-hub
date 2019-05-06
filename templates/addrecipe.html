@@ -6,7 +6,7 @@
             <p class="heading">Add Recipe</p>
             <form action="{{ url_for('insert_recipe') }}" method="POST" class="add-recipe" name="add-recipe">
                 <div class="input-field">
-                    <select name="category_name" id="category_name" required="required" class="validate">
+                    <select name="category_name" id="category_name" required="required" class="validate category">
                       <option value="" disabled selected>Category</option>
                       {% for category in categories %}
                         <option>{{category.category_name}}</option>
@@ -49,7 +49,10 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
+                    <div class="ingredient-btn">
+                        <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
+                        <a class="btn waves-effect remove red waves-light" id="remove-ingredient-btn">Remove Ingredient</a>
+                    </div>
                     <div class="input-field">
                         <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method" required></textarea>
                         <label for="icon_prefix">Method</label>

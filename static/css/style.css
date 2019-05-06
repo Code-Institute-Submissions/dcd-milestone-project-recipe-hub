@@ -83,7 +83,7 @@ nav .button-collapse {
   height: 200px;
   margin: 0px 30px;
 }
-.heading_container {
+.heading_container, .recipe-contents {
   flex-direction: row;
   display: flex;
 }
@@ -101,9 +101,8 @@ nav .button-collapse {
   padding-left: 20px;
   padding-right: 20px;
 }
-.recipe-contents {
-  display: flex;
-  flex-direction: row;
+.category {
+  margin: 0px 10px;
 }
 /*Headings*/
 .heading {
@@ -163,11 +162,14 @@ a {
 .icon {
   margin-right: 10px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 660px) {
   .flex-container, .recipe-contents {
     flex-direction: column;
   }
   .form_container {
     width: 90%;
+  }
+  .remove {
+    margin-top: 30px;
   }
 }

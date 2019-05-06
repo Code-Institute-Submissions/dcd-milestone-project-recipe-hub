@@ -6,7 +6,7 @@
             <p class="heading">Edit Recipe</p>
             <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="add-recipe">
                 <div class="input-field">
-                    <select name="category_name" id="category_name" class="validate" required="required">
+                    <select name="category_name" id="category_name" class="validate category" required="required">
                         <option value="" disabled selected>Category</option>
                         {% for cat in categories %}
                               {% if cat.category_name == recipe.category %}
@@ -59,7 +59,10 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
+                    <div class="ingredient-btn">
+                        <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
+                        <a class="btn waves-effect remove red waves-light" id="remove-ingredient-btn">Remove Ingredient</a>
+                    </div>
                     <div class="input-field">
                         <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method" required>{{recipe.method}}</textarea>
                         <label for="icon_prefix">Method</label>
