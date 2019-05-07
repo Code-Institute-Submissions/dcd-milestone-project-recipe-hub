@@ -49,6 +49,8 @@ TBD
 
 ![Wireframe / Site Diagram](static/images/wireframes/DCD_Search_Results.png "Search Results")
 
+## Database Schema
+TBD
 
 ## Features
  
