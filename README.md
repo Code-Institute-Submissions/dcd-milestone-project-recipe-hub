@@ -105,7 +105,8 @@ I took inspiration for the colour scheme from [Color-Hex](https://www.color-hex.
 ![Wireframe / Site Diagram](static/images/wireframes/DCD_Search_Results.png "Search Results")
 
 ## Database Schema
-TBD
+![Wireframe / Site Diagram](static/images/wireframes/Database_Schema_MongoDB.png "Database Schema")
+
 
 ## Features
  
