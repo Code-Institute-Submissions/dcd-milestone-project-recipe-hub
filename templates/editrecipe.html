@@ -39,17 +39,6 @@
                         <input disabled value="Default Image" id="default_image" name="default_image" type="text" class="validate default_image">
                         <label for="default_image">Image</label>
                     </div>
-                    <div class="switch">
-                        <label>
-                            {% if recipe.is_vegan == "on" %}
-                              <input id="is_vegan" name="is_vegan" type="checkbox" checked>
-                             {% else %}
-                             <input id="is_vegan" name="is_vegan" type="checkbox">
-                            {% endif %}
-                          <span class="lever"></span>
-                          Is Vegan
-                        </label>
-                    </div>
                     <div id="field-section">
                         <div id="form-field">
                             {% for ingredient in recipe.ingredients %}
