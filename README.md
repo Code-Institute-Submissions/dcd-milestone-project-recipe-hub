@@ -105,7 +105,7 @@ I took inspiration for the colour scheme from [Color-Hex](https://www.color-hex.
 ![Wireframe / Site Diagram](static/images/wireframes/DCD_Search_Results.png "Search Results")
 
 ## Database Schema
-![Wireframe / Site Diagram](static/images/wireframes/Database_Schema_mongo.png "Database Schema")
+![Wireframe / Site Diagram](static/images/database_schema/Database_Schema_mongo.png "Database Schema")
 
 
 ## Features
@@ -149,8 +149,21 @@ I took inspiration for the colour scheme from [Color-Hex](https://www.color-hex.
 ## Testing
 I included a piece of custom automated testing in the app to check whether the routing for the site was working correctly, this can be seen here The first test is for the homepage (index.html) - this looks for the response of the page (200, if the page is up for example) and then compares to see if this is equal to the 200 response status needed. If yes, the test passes. This works the same for the other tests, but for the login and signup pages.
 
+### Manual Testing
+- **User goes to the URL https://dcd-cookbook.herokuapp.com/ (Homepage):** _Homepage is up and showing a 200 response status in developer tools_
+- **User who does not have an account tries to log in via the login page:** _Form data is posted to the users document - the username is not in the database so the user is redirected to the sign up page_
+- **User who does have an account tries to log in via the login page:** _Form data is posted to the users document - the username is in the database so the hashed password is checked against that stored in the database. User is redirected to the My Recipes profile page as details are correct_
+- **User wants to view a recipe:** _User clicks on a recipe card on the homepage (whether logged in or not) and they are redirected to the recipe details page with the url of /recipe/<recipe_id>_
+- **User wants to filter recipes by category:** _User can click on any of the category buttons in the navbar to filter by this term (whether logged in or not). The user will be taken to a URL of /<category_name> and will display recipe cards that have the "category" field of that particular category._
+- **User wants to add a recipe:** _If the user is not logged in, but tries to access the /add_recipe URL they will see a page that prompts them to log in to view content. If the user is logged in they can open the navbar and choose the option to 'Add Recipe'. This opens a page with a form they can complete with the required fields. The user must complete all fields in order for the form to post, validation error messages will show otherwise. Once all fields are complete, user clicks to add recipe and their recipe is displayed on their My Recipes profile page._
+- **User wants to edit a recipe:** _If the user is not logged in, they will not be able to edit the recipe. If the user is logged in, they will see an edit button appear on the recipe card inside their My Recipes page. Only the owner of the recipe can edit the recipe. They are taken to a form pre-filled with the details of the recipe stored in the database. The user can edit the necessary fields (all fields must still be completed) and then they can save the changes. The edited recipe will be visible in their My Recipes page._
+- **User wants to delete a recipe:** _If the user is not logged in, they will not be able to delete the recipe. If the user is logged in, they will see a delete button appear on the recipe card inside their My Recipes page. Only the owner of the recipe can delete the recipe. Once the delete button is clicked, the recipe is removed and the user stays on the My Recipes page._
+- **User wants to manage categories:** _If the user is not logged in, they will not be able to manage the categories. If the user is logged in they will be able to choose the 'Manage Categories' option in the navbar._
+- **User wants to edit a category:** _Same as the above. On the Manage Categories page the user can click the edit button next to the category they wish to edit. This takes the user to a small form where they can edit the name of the category. Upon saving changes the user is taken back to the /categories URL where all the categories are displayed alphabetically (a renamed recipe will result in the order rearranging alphabetically)_
+- **User wants to delete a category:** _Same as above. On the Manage Categories page the user can click the delete button next to the category they wish to delete. This keeps the user on the /categories URL but the required category will be removed from the list._
+
 ## Bugs
-TBD
+At first, I was only implementing sessions by way of assigning a user a username to allow them to post/edit/delete recipes and categories. However my mentor made a good point that anyone is then technically able to create an account and delete recipes/categories that are not their own. To resolve this, I have implemented basic user authentication using [flask bcrypt](https://flask-bcrypt.readthedocs.io/en/latest/). If the user tries to sign in and they have not created an account already, they will be redirected to the Sign Up page to do so. This is because the posted data in the login form will first check the users document to see if the username exists, and then that the hashed password matches. On the sign up page, the data is posted and the user's account is created. I have also hidden the content of certain pages from view if the username is not in the session data (this is replaced with a prompt for the user to login to view content) and have placed a conditional on the delete/edit recipe buttons so that these buttons only appear if the user that is logged in, is the owner of the recipe.
 
 ## Deployment
 
