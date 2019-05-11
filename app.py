@@ -1,5 +1,4 @@
 import os
-from env import env
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
@@ -11,6 +10,7 @@ app.secret_key = os.urandom(24)
 app.config['MONGO_DBNAME'] = 'recipe_hub'
 
 if app.debug:
+    from env import env
     app.config['MONGO_URI'] = env()
 else:
     app.config['MONGO_URI'] = os.getenv('MONGO_URI')
