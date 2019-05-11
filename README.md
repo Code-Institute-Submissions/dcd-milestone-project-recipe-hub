@@ -18,19 +18,19 @@ I took inspiration for the colour scheme from [Color-Hex](https://www.color-hex.
   - Once logged in, they can choose the 'Add Recipe' option in the navbar
   - The user is navigated to a [form](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/addrecipe.html) in which they can fill in the necessary information about their recipe
   - The form has validation, so all fields must be filled in before the 'Add' button will work.
-  - Once they have completed all fields and clicked to ['Add'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L97-L118) the data will be posted to the database and they will redirected back to their [My Recipes](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/profile.html) page where their recipe will be displayed in the lister view.
+  - Once they have completed all fields and clicked to ['Add'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L102-L123) the data will be posted to the database and they will redirected back to their [My Recipes](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/profile.html) page where their recipe will be displayed in the lister view.
 
 - A user wants to edit a recipe:
   - The user must be already logged in, and the user must be the owner of the recipe.
   - If both of the above are satisfied, on the My Recipes page there will be an 'Edit' button inside the card of each recipe.
   - The user clicks the 'Edit' button and is taken to an [editing form](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editrecipe.html). The form is pre-filled with the information about the recipe that they inputted.
   - The user can change aspects that they would like to (validation still applies so no fields can be left incomplete)
-  - The user can press the button to 'Save changes' or 'Cancel' if they change their mind. Pressing ['Save changes'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L121-L144) will post the changes to the database and redirect the user back to the My Recipes page.
+  - The user can press the button to 'Save changes' or 'Cancel' if they change their mind. Pressing ['Save changes'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L126-L149) will post the changes to the database and redirect the user back to the My Recipes page.
   
 - A user wants to delete a recipe:
   - The user must be already logged in, and the user must be the owner of the recipe.
   - If both of the above are satisfied, on the My Recipes page a 'Delete' button will appear inside the card.
-  - If the user clicks the ['Delete'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L147-L150) button, the recipe will be deleted and the user will remain on the My Recipes page.
+  - If the user clicks the ['Delete'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L152-L155) button, the recipe will be deleted and the user will remain on the My Recipes page.
   
 - A user wants to add a category:
   - The user must be already logged in.
@@ -42,26 +42,26 @@ I took inspiration for the colour scheme from [Color-Hex](https://www.color-hex.
 - A user wants to edit a category: 
   - The user must be already logged in.
   - Once logged in, the user can click the 'Manage Categories' button in the navbar.
-  - The user clicks ['Edit'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L185-L198) next to the category they want to edit, which will take them to a small [form](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editcategory.html).
+  - The user clicks ['Edit'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L190-L203) next to the category they want to edit, which will take them to a small [form](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editcategory.html).
   - The user enters the new name of the category and presses 'Save Changes'
   - The user is redirected back to the Categories lister with the edited category displayed - the categories are listed alphabetically.
   
 - A user wants to delete a category:
   - The user must be already logged in.
   - Once logged in, the user can click the 'Manage Categories' button in the navbar.
-  - The user clicks ['Delete'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L179-L182) next to the category they want to delete.
+  - The user clicks ['Delete'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L184-L187) next to the category they want to delete.
   - The user remains on the Categories lister and the category is deleted.
   
 - A user wants to view a recipe:
-  - On the homepage, or the My Recipes page (when logged in) the user can click on a recipe card to view the [recipe](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L153-L156) information. The [recipe card](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/recipe.html) contains information regarding ingredients, method, cooking time, preparation time, servings and the category as well as recipe name and image.
+  - On the homepage, or the My Recipes page (when logged in) the user can click on a recipe card to view the [recipe](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L158-L161) information. The [recipe card](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/recipe.html) contains information regarding ingredients, method, cooking time, preparation time, servings and the category as well as recipe name and image.
   
 - A user wants to filter by category:
-  - On the homepage, the user can click on the filters in the menu bar (i.e. Breakfast) to [filter by meal category](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L38-L48).
+  - On the homepage, the user can click on the filters in the menu bar (i.e. Breakfast) to [filter by meal category](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L43-L53).
   - The user is redirected to a [filter page](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/filter.html) displaying only these meals.
 
 - A user wants to log out:
   - Only applicable to logged in users
-  - The user can click 'Log Out' in the navbar, they are [redirected to the homepage](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L91-L94).
+  - The user can click 'Log Out' in the navbar, they are [redirected to the homepage](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L96-L99).
 
 ## Wireframes created using Balsamiq:
 
@@ -111,15 +111,16 @@ I took inspiration for the colour scheme from [Color-Hex](https://www.color-hex.
 ## Features
  
 ### Existing Features
-- The site uses basic user authentication to [create a user account](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L63-L76) and allow the user to [log in](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L51-L60) - the site is then accessible through the login/sign up functionality.
-- Users can add a recipe by filling out the fields in the ['Add a Recipe'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/addrecipe.html) form. The [data](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L103-L118) from this form is then used to construct the recipe card.
+- The site uses basic user authentication to [create a user account](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L68-L81) and allow the user to [log in](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L56-L65) - the site is then accessible through the login/sign up functionality.
+- Users can add a recipe by filling out the fields in the ['Add a Recipe'](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/addrecipe.html) form. The [data](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L108-L123) from this form is then used to construct the recipe card.
 - View [recipe card](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/recipe.html) containing image and all information inputted in form including ingredients, method, cooking and preparation time etc.
-- There is the ability to [Edit](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editrecipe.html)/[Delete](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L147-L150) recipes you as a user have added - recipes are protected from deletion by anyone else as delete button only available to owner of recipe.
-- A user can [Add](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/addcategory.html)/[Edit](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editcategory.html)/[Delete](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L179-L182) categories
+- There is the ability to [Edit](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editrecipe.html)/[Delete](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L152-L155) recipes you as a user have added - recipes are protected from deletion by anyone else as delete button only available to owner of recipe.
+- A user can [Add](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/addcategory.html)/[Edit](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/editcategory.html)/[Delete](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/app.py#L184-L187) categories
 
 ### Features Left to Implement
 - Likes on recipes: Users can upvote recipes: I would add an additional field inside each MongoDB document for 'likes' and have this increment by 1 whenever the user clicks on the like button.
 - Search bar to filter on keywords: I would add a search bar in the navigation area, which would allow the user to search for keywords featured in the ingredients array.
+- For optimisation, I would move the logic behind the filtering of meals by category into the back-end of the project rather than filtering in the [front-end](https://github.com/charlotteskinner90/dcd-milestone-project-recipe-hub/blob/master/templates/filter.html) 
 
 ## Technologies Used
 
