@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="category">
-        <div class="recipe-detail-container">
-            <p class="recipe-header">{{recipe.name}}</p>
-            <div class="recipe-contents">
-                <div>
-                    <img src="{{recipe.image}}" class="image"/>
-                    <div class="padding">
-                        <p><i class="material-icons icon">timer</i>Cooking time: {{recipe.cooking_time}}</p>
-                        <p><i class="material-icons icon">restaurant_menu</i>Prep time: {{recipe.prep_time}}</p>
-                        <p><i class="material-icons icon">person</i>Serves: {{recipe.serves}}</p>
-                        <p><i class="material-icons icon">folder</i>Category: {{recipe.category}}</p>
-                    </div>
-                </div>
-                <div class="padding">
-                    <p class="recipe-header">Ingredients</p>
-                    {% for ingredient in recipe.ingredients %}
-                        <p>{{ingredient}}</p>
-                    {% endfor %}
-                    <p class="recipe-header">Method</p>
-                    <p>{{recipe.method}}</p>
-                </div>
-            </div>
+  <div class="category">
+    <div class="recipe-detail-container">
+      <p class="recipe-header">{{recipe.name}}</p>
+      <div class="recipe-contents">
+        <div>
+          <img src="{{recipe.image}}" class="image"/>
+          <div class="padding">
+            <p class="recipe-stat"><i class="material-icons icon">timer</i>Cooking time: {{recipe.cooking_time}}</p>
+            <p class="recipe-stat"><i class="material-icons icon">restaurant_menu</i>Prep time: {{recipe.prep_time}}</p>
+            <p class="recipe-stat"><i class="material-icons icon">person</i>Serves: {{recipe.serves}}</p>
+            <p class="recipe-stat"><i class="material-icons icon">folder</i>Category: {{recipe.category}}</p>
+          </div>
         </div>
+        <div class="padding">
+          <p class="recipe-header">Ingredients</p>
+          {% for ingredient in recipe.ingredients %}
+            <p class="ingredient">{{ingredient}}</p>
+          {% endfor %}
+          <p class="recipe-header">Method</p>
+          <p>{{recipe.method}}</p>
+        </div>
+      </div>
     </div>
+  </div>
 {% endblock %}

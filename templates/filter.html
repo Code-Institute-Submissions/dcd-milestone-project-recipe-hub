@@ -1,33 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <nav class="filter-nav">
-      <div class="nav-wrapper">
-        <a href="#" data-activates="mobile-filter" class="button-collapse"><i class="material-icons">filter_list</i></a>
-        <ul class="right hide-on-med-and-down">
-          {% for category in categories %}
-            <li><a href="{{url_for('filter_list', category_name=category.category_name)}}" class="waves-effect blue filter-btn waves-light btn">{{category.category_name}}</a></li>
-          {% endfor %}
-        </ul>
-        <ul class="side-nav" id="mobile-filter">
-          {% for category in categories %}
-            <li><a href="{{url_for('filter_list', category_name=category.category_name)}}" class="waves-effect blue filter-btn waves-light btn">{{category.category_name}}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    </nav>
-    <p class="heading">{{category_name.category_name}}</p>
-    <div class="flex-container">
-        {% for recipe in recipes %}
-            {% if recipe.category == category_name.category_name %}
-                <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
-                    <div class="recipe-card col s12 m6 l3">
-                        <h5 class="recipe-title">{{recipe.name}}</h5>
-                        <img src="{{recipe.image}}" alt="" class="recipe_image" />
-                        <a href="{{url_for('recipe', recipe_id=recipe._id)}}" class="waves-effect blue waves-light btn">View Recipe</a>
-                    </div>
-                </a>
-            {% endif %}
+  <nav class="filter-nav">
+    <div class="nav-wrapper">
+      <a href="#" data-activates="mobile-filter" class="button-collapse"><i class="material-icons">filter_list</i></a>
+      <ul class="right hide-on-med-and-down">
+        {% for category in categories %}
+          <li><a href="{{url_for('filter_list', category_name=category.category_name)}}" class="waves-effect blue filter-btn waves-light btn">{{category.category_name}}</a></li>
         {% endfor %}
+      </ul>
+      <ul class="side-nav" id="mobile-filter">
+        {% for category in categories %}
+          <li><a href="{{url_for('filter_list', category_name=category.category_name)}}" class="waves-effect blue filter-btn waves-light btn">{{category.category_name}}</a></li>
+        {% endfor %}
+      </ul>
     </div>
+  </nav>
+  <p class="heading">{{category_name.category_name}}</p>
+  <div class="flex-container">
+    {% for recipe in recipes %}
+      {% if recipe.category == category_name.category_name %}
+        <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
+          <div class="recipe-card col s12 m6 l3">
+            <h5 class="recipe-title">{{recipe.name}}</h5>
+            <img src="{{recipe.image}}" alt="" class="recipe_image" />
+            <a href="{{url_for('recipe', recipe_id=recipe._id)}}" class="waves-effect blue waves-light btn">View Recipe</a>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endblock %}

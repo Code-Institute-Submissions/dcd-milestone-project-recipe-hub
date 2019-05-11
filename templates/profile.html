@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p class="heading">My Recipes</p>
-    <div class="flex-container">
-        {% for recipe in recipes %}
-            <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
-                <div class="recipe-card col s12 m6 l3">
-                    <h5 class="recipe-title">{{recipe.name}}</h5>
-                    <img src="{{recipe.image}}" alt="" class="recipe_image" />
-                    <div class="recipe-button-container">
-                        <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect blue edit waves-light btn">Edit</a>
-                        <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect red delete waves-light btn">Delete</a>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
+  <p class="heading">My Recipes</p>
+  <div class="flex-container">
+    {% for recipe in recipes %}
+      <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
+        <div class="recipe-card col s12 m6 l3">
+          <h5 class="recipe-title">{{recipe.name}}</h5>
+          <img src="{{recipe.image}}" alt="" class="recipe_image" />
+          <div class="recipe-button-container">
+            <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect blue edit waves-light btn">Edit</a>
+            <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect red delete waves-light btn">Delete</a>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 {% endblock %}

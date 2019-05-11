@@ -1,78 +1,80 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if session.username %}
+  {% if session.username %}
     <div class="recipe">
-        <div class="form_container">
-            <p class="heading">Add Recipe</p>
-            <form action="{{ url_for('insert_recipe') }}" method="POST" class="add-recipe" name="add-recipe">
+      <div class="form_container">
+        <header>
+          <p class="heading">Add Recipe</p>
+        </header>
+        <form action="{{ url_for('insert_recipe') }}" method="POST" class="add-recipe" name="add-recipe">
+          <div class="input-field">
+            <select name="category_name" id="category_name" required="required" class="validate category">
+              <option value="" disabled selected>Category</option>
+              {% for category in categories %}
+                <option>{{category.category_name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="add-recipe-fields">
+            <div class="input-field">
+              <input id="icon_prefix" type="text" class="validate" id="name" name="name" required>
+              <label for="icon_prefix">Recipe name</label>
+            </div>
+            <div class="input-field">
+              <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking" required>
+              <label for="icon_prefix">Cooking time</label>
+            </div>
+            <div class="input-field">
+              <input id="icon_prefix" type="text" class="validate" id="prep" name="prep" required>
+              <label for="icon_prefix">Preparation time</label>
+            </div>
+            <div class="input-field">
+              <input id="icon_prefix" type="number" min="1" class="validate" id="serves" name="serves" required>
+              <label for="icon_prefix">Serves</label>
+            </div>
+            <div class="input-field">
+              <input disabled value="Default Image" id="default_image" name="default_image" type="text" class="validate default_image" required>
+              <label for="default_image">Image</label>
+            </div>
+            <div id="field-section">
+              <div id="form-field">
                 <div class="input-field">
-                    <select name="category_name" id="category_name" required="required" class="validate category">
-                      <option value="" disabled selected>Category</option>
-                      {% for category in categories %}
-                        <option>{{category.category_name}}</option>
-                      {% endfor %}
-                    </select>
+                  <input type="text" class="validate" id="ingredient" name="ingredient" required />
+                  <label for="ingredient">Ingredient (e.g. 100g Flour)</label>
                 </div>
-                <div class="add-recipe-fields">
-                    <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="name" name="name" required>
-                        <label for="icon_prefix">Recipe name</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="cooking" name="cooking" required>
-                        <label for="icon_prefix">Cooking time</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="prep" name="prep" required>
-                        <label for="icon_prefix">Prep time</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="serves" name="serves" required>
-                        <label for="icon_prefix">Serves</label>
-                    </div>
-                    <div class="input-field">
-                        <input disabled value="Default Image" id="default_image" name="default_image" type="text" class="validate default_image" required>
-                        <label for="default_image">Image</label>
-                    </div>
-                    <div id="field-section">
-                        <div id="form-field">
-                            <div class="input-field">
-                                <input type="text" class="validate" id="ingredient" name="ingredient" required />
-                                <label for="ingredient">Ingredient (e.g. 100g Flour)</label>
-                            </div>
-                        </div>
-                        <div class="ingredient-btn">
-                            <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
-                            <a class="btn waves-effect remove red waves-light" id="remove-ingredient-btn">Remove Ingredient</a>
-                        </div>
-                    </div>
-                    <div class="input-field">
-                        <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method" required></textarea>
-                        <label for="icon_prefix">Method</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine" required>
-                        <label for="icon_prefix">Cuisine</label>
-                    </div>
-                    <div class="input-field">
-                        <input disabled value="{{session['username']}}" id="author" name="author" type="text" class="validate">
-                        <label for="author_name">Author</label>
-                    </div>
-                </div>
-                <button class="btn waves-effect waves-light" id="submitbutton" type="submit" name="action">Add</button>
-            </form>
-            <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
-        </div>
+              </div>
+              <div class="ingredient-btn">
+                <a class="btn waves-effect waves-light" id="add-ingredient-btn">Add Ingredient</a>
+                <a class="btn waves-effect remove red waves-light" id="remove-ingredient-btn">Remove Ingredient</a>
+              </div>
+            </div>
+            <div class="input-field">
+              <textarea id="icon_prefix" type="text" class="materialize-textarea" id="method" name="method" required></textarea>
+              <label for="icon_prefix">Method</label>
+            </div>
+            <div class="input-field">
+              <input id="icon_prefix" type="text" class="validate" id="cuisine" name="cuisine" required>
+              <label for="icon_prefix">Cuisine</label>
+            </div>
+            <div class="input-field">
+              <input disabled value="{{session['username']}}" id="author" name="author" type="text" class="validate">
+              <label for="author_name">Author</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" id="submitbutton" type="submit" name="action">Add</button>
+        </form>
+        <a class="btn waves-effect waves-light red action-button" href="{{url_for('loggedin', username=session['username'])}}">Cancel</a>
+      </div>
     </div>
-    {% else %}
+  {% else %}
     <div class="login">
-        <div class="form_container">
-            <header>
-                <p class="heading">You will need to sign in to view this information</p>
-            </header>
-            <a href="{{url_for('login')}}" class="waves-effect orange accent-2 waves-light btn">Login</a>
-        </div>
+      <div class="form_container">
+        <header>
+          <p class="heading">You will need to sign in to view this information</p>
+        </header>
+        <a href="{{url_for('login')}}" class="waves-effect orange accent-2 waves-light btn">Login</a>
+      </div>
     </div>
-    {% endif %}
+  {% endif %}
 {% endblock %}

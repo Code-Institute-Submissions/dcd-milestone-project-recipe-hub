@@ -126,6 +126,12 @@ a {
 .instruction {
   font-size: 1.5rem;
 }
+.recipe-stat {
+  display: flex;
+}
+.ingredient {
+  text-transform: capitalize;
+}
 /*Form*/
 .login-form, .category-form {
   width: 60%;
@@ -180,5 +186,8 @@ a {
   }
   .remove {
     margin-top: 30px;
+  }
+  .recipe-header {
+    text-align: center;
   }
 }

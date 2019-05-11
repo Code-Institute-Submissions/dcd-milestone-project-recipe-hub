@@ -2,31 +2,31 @@
 
 {% block content %}
     {% if session.username %}
-    <div class="category">
+      <div class="category">
         <div class="form_container">
-            <div class="heading_container">
-                <p class="heading">Manage Categories</p>
-            </div>
-                {% for category in categories %}
-                    <div class="category_container">
-                        <p>{{category.category_name}}</p>
-                        <div class="button_container">
-                            <a class="btn waves-effect waves-light" href="{{url_for('edit_category', category_id=category._id)}}">Edit</a>
-                            <a class="btn waves-effect waves-light red" href="{{url_for('delete_category', category_id=category._id)}}">Delete</a>
-                        </div>
-                    </div>
-                {% endfor %}
-            <a class="btn waves-effect waves-light blue action-button" href="{{url_for('add_category')}}">Add Category</a>
+          <div class="heading_container">
+            <p class="heading">Manage Categories</p>
+          </div>
+            {% for category in categories %}
+              <div class="category_container">
+                <p>{{category.category_name}}</p>
+                <div class="button_container">
+                  <a class="btn waves-effect waves-light" href="{{url_for('edit_category', category_id=category._id)}}">Edit</a>
+                  <a class="btn waves-effect waves-light red" href="{{url_for('delete_category', category_id=category._id)}}">Delete</a>
+                </div>
+              </div>
+            {% endfor %}
+          <a class="btn waves-effect waves-light blue action-button" href="{{url_for('add_category')}}">Add Category</a>
         </div>
-    </div>
+      </div>
     {% else %}
-    <div class="login">
+      <div class="login">
         <div class="form_container">
-            <header>
-                <p class="heading">You will need to sign in to view this information</p>
-            </header>
-            <a href="{{url_for('login')}}" class="waves-effect orange accent-2 waves-light btn">Login</a>
+          <header>
+            <p class="heading">You will need to sign in to view this information</p>
+          </header>
+          <a href="{{url_for('login')}}" class="waves-effect orange accent-2 waves-light btn">Login</a>
         </div>
-    </div>
+      </div>
     {% endif %}
 {% endblock %}

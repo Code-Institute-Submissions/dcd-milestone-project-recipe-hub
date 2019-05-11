@@ -9,11 +9,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 app.config['MONGO_DBNAME'] = 'recipe_hub'
-
-if app.debug:
-    app.config['MONGO_URI'] = env()
-else:
-    app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.config['MONGO_URI'] = env()
 
 mongo = PyMongo(app)
 
