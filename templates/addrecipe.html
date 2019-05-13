@@ -34,8 +34,16 @@
               <label for="icon_prefix">Serves</label>
             </div>
             <div class="input-field">
-              <input disabled value="Default Image" id="default_image" name="default_image" type="text" class="validate default_image" required>
-              <label for="default_image">Image</label>
+              <input 
+                id="image" 
+                name="image" 
+                type="url" 
+                class="validate image" 
+                placeholder="e.g. https://example.com"
+                pattern="https://.*"
+                required   
+              >
+              <label for="image">Image (For best results, choose an image with a 4:3 aspect ratio)</label>
             </div>
             <div id="field-section">
               <div id="form-field">

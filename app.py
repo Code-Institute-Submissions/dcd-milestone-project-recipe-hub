@@ -23,12 +23,6 @@ users_collection = mongo.db.users
 recipes_collection = mongo.db.recipes
 categories_collection = mongo.db.categories
 
-# Variables
-
-default_image = \
-    'https://zabas.com/wp-content/uploads/2014/06/placeholder-food-hover.png'
-
-
 # Routes
 
 @app.route('/', methods=['POST', 'GET'])
@@ -114,7 +108,7 @@ def insert_recipe():
         'cooking_time': request.form.get('cooking'),
         'prep_time': request.form.get('prep'),
         'serves': request.form.get('serves'),
-        'image': default_image,
+        'image': request.form.get('image'),
         'added_by': session['username'],
         'ingredients': request.form.getlist('ingredient'),
         'method': request.form.get('method'),
@@ -139,7 +133,7 @@ def update_recipe(recipe_id):
         'name': request.form.get('name'),
         'cooking_time': request.form.get('cooking'),
         'prep_time': request.form.get('prep'),
-        'image': default_image,
+        'image': request.form.get('image'),
         'serves': request.form.get('serves'),
         'ingredients': request.form.getlist('ingredient'),
         'method': request.form.get('method'),
